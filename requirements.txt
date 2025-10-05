@@ -18,7 +18,7 @@ openpyxl==3.1.2
 # Utilities
 python-dotenv==1.0.0
 fake-useragent==1.4.0
-urllib3==2.1.0
+urllib3==2.5.0
 
 # Development Tools (optional but recommended)
 jupyter==1.0.0
