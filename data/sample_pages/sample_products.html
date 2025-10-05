@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample Product Page - Web Scraping Tutorial</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .product {
+            border: 1px solid #ddd;
+            padding: 20px;
+            margin: 10px 0;
+        }
+        .product-title {
+            color: #333;
+            font-size: 24px;
+        }
+        .price {
+            color: #B12704;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .rating {
+            color: #FFA500;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Sample E-Commerce Site</h1>
+        <nav>
+            <a href="/">Home</a> |
+            <a href="/products">Products</a> |
+            <a href="/about">About</a> |
+            <a href="/contact">Contact</a>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Featured Products</h2>
+        
+        <div class="product" data-id="101">
+            <h3 class="product-title">Laptop Pro 15</h3>
+            <p class="price">$1,299.99</p>
+            <p class="rating">★★★★☆ (4.5/5) - 234 reviews</p>
+            <p class="description">High-performance laptop with 16GB RAM and 512GB SSD</p>
+            <p class="stock">In Stock</p>
+            <a href="/product/101" class="product-link">View Details</a>
+        </div>
+
+        <div class="product" data-id="102">
+            <h3 class="product-title">Wireless Mouse</h3>
+            <p class="price">$29.99</p>
+            <p class="rating">★★★★★ (5/5) - 567 reviews</p>
+            <p class="description">Ergonomic wireless mouse with 6 buttons</p>
+            <p class="stock">In Stock</p>
+            <a href="/product/102" class="product-link">View Details</a>
+        </div>
+
+        <div class="product" data-id="103">
+            <h3 class="product-title">Mechanical Keyboard</h3>
+            <p class="price">$89.99</p>
+            <p class="rating">★★★★☆ (4/5) - 123 reviews</p>
+            <p class="description">RGB backlit mechanical keyboard with blue switches</p>
+            <p class="stock">Out of Stock</p>
+            <a href="/product/103" class="product-link">View Details</a>
+        </div>
+
+        <h2>Product Comparison Table</h2>
+        <table id="comparison">
+            <thead>
+                <tr>
+                    <th>Product Name</th>
+                    <th>Price</th>
+                    <th>Rating</th>
+                    <th>Category</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Laptop Pro 15</td>
+                    <td>$1,299.99</td>
+                    <td>4.5</td>
+                    <td>Computers</td>
+                </tr>
+                <tr>
+                    <td>Wireless Mouse</td>
+                    <td>$29.99</td>
+                    <td>5.0</td>
+                    <td>Accessories</td>
+                </tr>
+                <tr>
+                    <td>Mechanical Keyboard</td>
+                    <td>$89.99</td>
+                    <td>4.0</td>
+                    <td>Accessories</td>
+                </tr>
+                <tr>
+                    <td>USB-C Hub</td>
+                    <td>$49.99</td>
+                    <td>4.8</td>
+                    <td>Accessories</td>
+                </tr>
+                <tr>
+                    <td>Monitor 27"</td>
+                    <td>$399.99</td>
+                    <td>4.7</td>
+                    <td>Displays</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>Customer Reviews</h2>
+        <div class="reviews">
+            <div class="review">
+                <h4>John Doe</h4>
+                <p class="rating">★★★★★</p>
+                <p>Great laptop! Very fast and reliable.</p>
+                <p class="date">Posted: 2024-01-15</p>
+            </div>
+            <div class="review">
+                <h4>Jane Smith</h4>
+                <p class="rating">★★★★☆</p>
+                <p>Good mouse, but battery life could be better.</p>
+                <p class="date">Posted: 2024-01-10</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Sample E-Commerce. All rights reserved.</p>
+        <p>Contact: <a href="mailto:info@example.com">info@example.com</a></p>
+    </footer>
+</body>
+</html>
