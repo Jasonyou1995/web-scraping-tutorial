@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Structure Demo - Web Scraping Tutorial</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-align: center;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+
+        nav {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        nav a {
+            display: inline-block;
+            margin: 0 15px;
+            padding: 10px 20px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        nav a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Main Content */
+        main {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        h2 {
+            color: #2c3e50;
+            font-size: 2em;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        /* Product Cards */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .product {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            border-color: #667eea;
+        }
+
+        .product.featured {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            border-color: #ff6b6b;
+        }
+
+        .product.featured::before {
+            content: "⭐ FEATURED";
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #ff6b6b;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+
+        .product-title {
+            color: #2c3e50;
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .price {
+            color: #e74c3c;
+            font-size: 1.8em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .rating {
+            color: #f39c12;
+            font-size: 1.1em;
+            margin-bottom: 10px;
+        }
+
+        .description {
+            color: #7f8c8d;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .stock {
+            color: #27ae60;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .stock.out-of-stock {
+            color: #e74c3c;
+        }
+
+        .product-link {
+            display: inline-block;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        .product-link:hover {
+            background: linear-gradient(45deg, #764ba2, #667eea);
+            transform: scale(1.05);
+        }
+
+        /* Table Styles */
+        .table-container {
+            margin: 30px 0;
+            overflow-x: auto;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        th {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #ecf0f1;
+            transition: background-color 0.3s ease;
+        }
+
+        tr:hover td {
+            background-color: #f8f9fa;
+        }
+
+        tr:nth-child(even) td {
+            background-color: #f8f9fa;
+        }
+
+        /* Lists */
+        .features-section {
+            margin: 30px 0;
+        }
+
+        .features-list {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+        }
+
+        .features-list ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .features-list li {
+            padding: 8px 0;
+            position: relative;
+            padding-left: 30px;
+            color: #2c3e50;
+            font-weight: 500;
+        }
+
+        .features-list li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #27ae60;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        /* Reviews Section */
+        .reviews-section {
+            margin: 30px 0;
+        }
+
+        .review {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 15px;
+            border-left: 5px solid #667eea;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .review-author {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .review-rating {
+            color: #f39c12;
+            margin-bottom: 10px;
+        }
+
+        .review-text {
+            color: #7f8c8d;
+            font-style: italic;
+        }
+
+        .review-date {
+            color: #95a5a6;
+            font-size: 0.9em;
+            margin-top: 10px;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        footer p {
+            color: #7f8c8d;
+            margin: 10px 0;
+        }
+
+        footer a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+
+            nav a {
+                display: block;
+                margin: 5px 0;
+            }
+        }
+
+        /* Highlighting for Educational Purposes */
+        .highlight-element {
+            position: relative;
+        }
+
+        .highlight-element::after {
+            content: attr(data-element);
+            position: absolute;
+            top: -25px;
+            left: 0;
+            background: #e74c3c;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 5px;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+
+        /* Code-like styling for educational elements */
+        .code-hint {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <!-- This is the HEADER section -->
+    <header id="main-header" class="highlight-element" data-element="&lt;header&gt;">
+        <h1>🛍️ Sample E-Commerce Site</h1>
+        <p class="subtitle">Perfect for learning HTML structure and web scraping!</p>
+        
+        <!-- Navigation menu -->
+        <nav>
+            <a href="/" class="nav-link">🏠 Home</a>
+            <a href="/products" class="nav-link">📦 Products</a>
+            <a href="/about" class="nav-link">ℹ️ About</a>
+            <a href="/contact" class="nav-link">📞 Contact</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <!-- This is the MAIN content area -->
+        <main class="highlight-element" data-element="&lt;main&gt;">
+            <h2>✨ Featured Products</h2>
+            <p>These products demonstrate different HTML elements and attributes that are commonly scraped:</p>
+            
+            <!-- Product Grid - demonstrates DIV containers and CLASS attributes -->
+            <div class="products-grid">
+                
+                <!-- Product 1: Basic product card -->
+                <div class="product" data-id="101" data-category="electronics" data-price="1299.99">
+                    <h3 class="product-title">💻 Laptop Pro 15</h3>
+                    <p class="price">$1,299.99</p>
+                    <p class="rating">⭐⭐⭐⭐☆ (4.5/5) - 234 reviews</p>
+                    <p class="description">High-performance laptop with 16GB RAM and 512GB SSD storage. Perfect for developers and content creators.</p>
+                    <p class="stock">✅ In Stock</p>
+                    <a href="/product/101" class="product-link">View Details</a>
+                </div>
+
+                <!-- Product 2: Featured product -->
+                <div class="product featured" data-id="102" data-category="accessories" data-price="29.99">
+                    <h3 class="product-title">🖱️ Wireless Mouse</h3>
+                    <p class="price">$29.99</p>
+                    <p class="rating">⭐⭐⭐⭐⭐ (5/5) - 567 reviews</p>
+                    <p class="description">Ergonomic wireless mouse with 6 programmable buttons and RGB lighting. Long battery life up to 30 days.</p>
+                    <p class="stock">✅ In Stock</p>
+                    <a href="/product/102" class="product-link">View Details</a>
+                </div>
+
+                <!-- Product 3: Out of stock product -->
+                <div class="product" data-id="103" data-category="accessories" data-price="89.99">
+                    <h3 class="product-title">⌨️ Mechanical Keyboard</h3>
+                    <p class="price">$89.99</p>
+                    <p class="rating">⭐⭐⭐⭐☆ (4/5) - 123 reviews</p>
+                    <p class="description">RGB backlit mechanical keyboard with blue switches. Customizable lighting effects and macro keys.</p>
+                    <p class="stock out-of-stock">❌ Out of Stock</p>
+                    <a href="/product/103" class="product-link">Notify When Available</a>
+                </div>
+
+            </div>
+
+            <!-- Product Features List -->
+            <div class="features-section">
+                <h2>🚀 Why Choose Our Products?</h2>
+                <div class="features-list">
+                    <ul>
+                        <li>Free shipping on orders over $50</li>
+                        <li>30-day money-back guarantee</li>
+                        <li>24/7 customer support</li>
+                        <li>2-year warranty on all electronics</li>
+                        <li>Secure payment processing</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Product Comparison Table -->
+            <h2>📊 Product Comparison</h2>
+            <div class="table-container">
+                <table id="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Product Name</th>
+                            <th>Price</th>
+                            <th>Rating</th>
+                            <th>Category</th>
+                            <th>Stock Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Laptop Pro 15</td>
+                            <td>$1,299.99</td>
+                            <td>4.5</td>
+                            <td>Electronics</td>
+                            <td>In Stock</td>
+                        </tr>
+                        <tr>
+                            <td>Wireless Mouse</td>
+                            <td>$29.99</td>
+                            <td>5.0</td>
+                            <td>Accessories</td>
+                            <td>In Stock</td>
+                        </tr>
+                        <tr>
+                            <td>Mechanical Keyboard</td>
+                            <td>$89.99</td>
+                            <td>4.0</td>
+                            <td>Accessories</td>
+                            <td>Out of Stock</td>
+                        </tr>
+                        <tr>
+                            <td>USB-C Hub</td>
+                            <td>$49.99</td>
+                            <td>4.8</td>
+                            <td>Accessories</td>
+                            <td>In Stock</td>
+                        </tr>
+                        <tr>
+                            <td>Monitor 27"</td>
+                            <td>$399.99</td>
+                            <td>4.7</td>
+                            <td>Displays</td>
+                            <td>In Stock</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Customer Reviews Section -->
+            <div class="reviews-section">
+                <h2>💬 Customer Reviews</h2>
+                
+                <div class="review">
+                    <div class="review-author">John Doe</div>
+                    <div class="review-rating">⭐⭐⭐⭐⭐</div>
+                    <div class="review-text">"Great laptop! Very fast and reliable. Perfect for my development work. The build quality is excellent and the battery life is impressive."</div>
+                    <div class="review-date">Posted: 2024-01-15</div>
+                </div>
+
+                <div class="review">
+                    <div class="review-author">Jane Smith</div>
+                    <div class="review-rating">⭐⭐⭐⭐☆</div>
+                    <div class="review-text">"Good mouse, but battery life could be better. The ergonomics are great and the RGB lighting is customizable. Overall satisfied with the purchase."</div>
+                    <div class="review-date">Posted: 2024-01-10</div>
+                </div>
+
+                <div class="review">
+                    <div class="review-author">Mike Johnson</div>
+                    <div class="review-rating">⭐⭐⭐⭐⭐</div>
+                    <div class="review-text">"Amazing keyboard! The mechanical switches feel great and the RGB lighting is beautiful. Highly recommend for anyone who types a lot."</div>
+                    <div class="review-date">Posted: 2024-01-08</div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- This is the FOOTER section -->
+    <footer class="highlight-element" data-element="&lt;footer&gt;">
+        <p>&copy; 2024 Sample E-Commerce Site. All rights reserved.</p>
+        <p>📧 Contact: <a href="mailto:info@example.com">info@example.com</a></p>
+        <p>📱 Phone: <a href="tel:+1234567890">(123) 456-7890</a></p>
+        <p>🌐 Website: <a href="https://example.com">www.example.com</a></p>
+    </footer>
+
+    <!-- Educational JavaScript for highlighting elements -->
+    <script>
+        // Add click handlers to demonstrate element selection
+        document.addEventListener('DOMContentLoaded', function() {
+            // Highlight elements when clicked (for educational purposes)
+            const highlightableElements = document.querySelectorAll('.product, .review, table tr');
+            
+            highlightableElements.forEach(element => {
+                element.addEventListener('click', function() {
+                    // Remove previous highlights
+                    document.querySelectorAll('.clicked-highlight').forEach(el => {
+                        el.classList.remove('clicked-highlight');
+                    });
+                    
+                    // Add highlight to clicked element
+                    this.classList.add('clicked-highlight');
+                    
+                    // Log element info for educational purposes
+                    console.log('Clicked element:', this.tagName);
+                    console.log('Classes:', this.className);
+                    console.log('ID:', this.id);
+                    console.log('Data attributes:', Object.keys(this.dataset));
+                });
+            });
+        });
+
+        // Add CSS for clicked highlights
+        const style = document.createElement('style');
+        style.textContent = `
+            .clicked-highlight {
+                outline: 3px solid #e74c3c !important;
+                outline-offset: 2px;
+                animation: pulse 0.5s ease-in-out;
+            }
+            
+            @keyframes pulse {
+                0% { transform: scale(1); }
+                50% { transform: scale(1.02); }
+                100% { transform: scale(1); }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
