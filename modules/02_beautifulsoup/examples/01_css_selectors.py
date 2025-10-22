@@ -70,6 +70,6 @@ for heading in all_headings:
 
 # Complex selector
 print("\n8. Complex selector:")
-featured_price = soup.select_one('div.product.featured p.price')
+featured_price = soup.select_one('div.product.featured p.price') # Select the price of the featured product
 if featured_price:
     print(f"   Featured product price: {featured_price.get_text()}")
